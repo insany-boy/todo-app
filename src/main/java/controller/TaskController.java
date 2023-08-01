@@ -23,7 +23,7 @@ public class TaskController {
     @SuppressWarnings("empty-statement")
     public void save(Task task) throws SQLException{
     
-        String sql = "INSERT INTO tasks (idproject" 
+        String sql = "INSERT INTO tasks (idproject, " 
                 + "name, "
                 + "description, "
                 + "completed, "

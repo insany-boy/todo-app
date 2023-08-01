@@ -5,6 +5,7 @@
 package view;
 
 import controller.ProjectController;
+import java.awt.event.WindowAdapter;
 import javax.swing.JOptionPane;
 import model.Project;
 
@@ -214,4 +215,8 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
     private javax.swing.JTextArea jTextAreaDescription;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
+
+    void addWindowListner(WindowAdapter windowAdapter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
