@@ -24,7 +24,38 @@ public class ProjectController {
        Connection connection = null;
        PreparedStatement statement = null;
        
-       try {
+     /*  try {
+            //Cria uma conex�o com o banco
+            connection = ConnectionFactory.getConnection();
+            //Cria um PreparedStatment, classe usada para executar a query
+            statement = connection.prepareStatement(sql);
+
+            statement.setString(1, project.getName());
+            statement.setString(2, project.getDescription());
+            statement.setDate(3, new java.sql.Date(project.getCreatedAt().getTime()));
+            statement.setDate(4, new java.sql.Date(project.getUpdateAt().getTime()));
+
+            //Executa a sql para inser��o dos dados
+            statement.execute();
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao salvar o projeto", ex);
+        } finally {
+            //Fecha as conex�es
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException("Erro ao fechar a conexão", ex);
+            }
+        }
+
+    } */
+       
+         try {
        
           connection = ConnectionFactory.getConnection();
           
@@ -35,13 +66,13 @@ public class ProjectController {
           statement.setDate(3, new Date(project.getCreatedAt().getTime()));          
           statement.setDate(4, new Date(project.getUpdateAt().getTime()));
           
-          statement.execute();
+          statement.executeUpdate();
        } catch (SQLException ex) {
            throw new RuntimeException("Erro ao salvar o projeto", ex);
        } finally {
            ConnectionFactory.closeConnection(connection, statement);
        }
-   }
+   } 
    
    public void update(Project project) {
    
@@ -67,7 +98,7 @@ public class ProjectController {
        statement.setDate(4, new Date(project.getUpdateAt().getTime()));
        statement.setInt(5, project.getId());
        
-       statement.execute();
+       statement.executeUpdate();
        
       } catch (SQLException ex){
           throw new RuntimeException("Erro em atualizar o projeto", ex);
@@ -125,7 +156,7 @@ public class ProjectController {
            connection = ConnectionFactory.getConnection();
            statement = connection.prepareStatement(sql);
            statement.setInt(1, idProject);
-           statement.execute();        
+           statement.executeUpdate();        
         } catch (SQLException ex){
             throw new RuntimeException("Erro ao deletar", ex);
         } finally {

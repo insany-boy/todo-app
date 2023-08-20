@@ -5,8 +5,11 @@
 package view;
 
 import controller.TaskController;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Project;
 import model.Task;
@@ -176,7 +179,28 @@ public class TaskDialogScreen extends javax.swing.JDialog {
         // TODO add your handling code here:
         
         try {
-           Task task = new Task();
+            
+            Task task = new Task();
+            
+            task.setIdProject(3);
+            task.setName(jTextFieldName.getText());
+            task.setDescription(jTextAreaDescription.getText());
+            task.setNotes(jTextAreaNotes.getText());
+            task.setIsCompleted(false);
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date deadline = null;
+            deadline = dateFormat.parse(jFormattedTextFielddeadline.getText());
+            task.setDeadline(deadline);
+            
+            controller.save(task);
+            ((MainScreen) getParent()).loadTasks(1);
+            JOptionPane.showMessageDialog(rootPane, "Tarefa salva com sucesso");
+            } catch (Exception e) {
+           JOptionPane.showMessageDialog(rootPane, e.getMessage()); 
+            
+      
+         /* Task task = new Task();
           
            task.setIdProject(3);
            
@@ -196,9 +220,9 @@ public class TaskDialogScreen extends javax.swing.JDialog {
            
         } catch (Exception e) {
             e.printStackTrace();
-//JOptionPane.showMessageDialog(rootPane, e.getMessage());
-        }
-        this.dispose();
+         JOptionPane.showMessageDialog(rootPane, e.getMessage()); */
+        } 
+        this.dispose(); 
     }//GEN-LAST:event_jPanelToolBarSaveMouseClicked
 
     /**

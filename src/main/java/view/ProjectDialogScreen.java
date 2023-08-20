@@ -5,6 +5,7 @@
 package view;
 
 import controller.ProjectController;
+import java.awt.event.WindowAdapter;
 import javax.swing.JOptionPane;
 import model.Project;
 
@@ -147,8 +148,18 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelToolBarSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelToolBarSaveMouseClicked
-        // TODO add your handling code here:       
+        // TODO add your handling code here:   
         try {
+            Project project = new Project();
+            project.setName(jTextFieldName.getText());
+            project.setDescription(jTextAreaDescription.getText());            
+            controller.save(project);
+            ((MainScreen) getParent()).loadProjects(); // tente adicionar essa linha
+            JOptionPane.showMessageDialog(rootPane, "Projeto salvo com sucesso");
+            } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            }
+       /* try {
             Project project = new Project();
             project.setName(jTextFieldName.getText());
             project.setDescription(jTextAreaDescription.getText());            
@@ -156,7 +167,7 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Projeto salvo com sucesso");        
         } catch (Exception e) {  
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
-        }                
+        } */               
         this.dispose();
     }//GEN-LAST:event_jLabelToolBarSaveMouseClicked
 
@@ -214,4 +225,8 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
     private javax.swing.JTextArea jTextAreaDescription;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
+
+    void addWindowListner(WindowAdapter windowAdapter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -13,6 +13,8 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Project;
+import model.Task;
+import util.TaskTableModel;
 
 /**
  *
@@ -23,7 +25,8 @@ public class MainScreen extends javax.swing.JFrame {
     ProjectController projectController;
     TaskController taskController;
     
-    DefaultListModel projectModel;
+    DefaultListModel projectsModel;
+    TaskTableModel taskModel;
     
     public MainScreen() {
         initComponents();
@@ -281,8 +284,14 @@ public class MainScreen extends javax.swing.JFrame {
         jTableTasks.setInheritsPopupMenu(true);
         jTableTasks.setRowHeight(50);
         jTableTasks.setSelectionBackground(new java.awt.Color(204, 255, 204));
+        jTableTasks.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableTasks.setShowGrid(false);
         jTableTasks.setShowHorizontalLines(true);
+        jTableTasks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableTasksMouseClicked(evt);
+            }
+        });
         jScrollPaneTasks.setViewportView(jTableTasks);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -353,6 +362,27 @@ public class MainScreen extends javax.swing.JFrame {
         taskDialogScreen.setVisible(rootPaneCheckingEnabled);
                
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jTableTasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTasksMouseClicked
+        // TODO add your handling code here:
+       int rowIndex = jTableTasks.rowAtPoint(evt.getPoint());
+        int columnIndex = jTableTasks.columnAtPoint(evt.getPoint());
+        
+        switch(columnIndex){
+             case 3:
+                 Task task = taskModel.getTasks().get(rowIndex);
+                 taskController.update(task);
+             break;
+             case 4:
+                 
+            break;
+             case 5:
+                 
+            break;
+             
+        } 
+        
+    }//GEN-LAST:event_jTableTasksMouseClicked
 
     /**
      * @param args the command line arguments
@@ -432,20 +462,30 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     public void initComponetsModel(){   
-        projectModel = new DefaultListModel();
+        projectsModel = new DefaultListModel();
         loadProjects();
+        
+        taskModel = new TaskTableModel();
+        jTableTasks.setModel(taskModel);
+        loadTasks(3);
     
     }
+    
+    public void loadTasks(int idproject) {
+        List<Task> tasks = taskController.getAll(idproject);
+        taskModel.setTasks(tasks);
+    } 
     
     public void loadProjects(){
         List<Project> projects = projectController.getAll();
         
-        projectModel.clear();       
+        projectsModel.clear();       
         
         for (int i = 0; i < projects.size(); i++){           
             Project project = projects.get(i);            
-            projectModel.addElement(project);       
+            projectsModel.addElement(project);       
         }
-       jListProjects.setModel(projectModel);      
+       jListProjects.setModel(projectsModel);      
     }
+    
 }

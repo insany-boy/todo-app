@@ -4,13 +4,19 @@
  */
 package model;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Logger;
+
 public class Project {
     
     private int id;
     private String name;
     private String description;
+    private List<Task> tasks;
     private Date createdAt;
     private Date updateAt;
+    private static final Logger LOG = Logger.getLogger(Project.class.getName());
+
 
     public Project(int id, String name, String description, Date createdAt, Date updateAt) {
         this.id = id;
@@ -67,7 +73,7 @@ public class Project {
 
     @Override
     public String toString() {
-        return "project{" + "id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt + ", updateAt=" + updateAt + '}';
+        return this.name;
     }
 
   /* public Object getUpdatedAt() {

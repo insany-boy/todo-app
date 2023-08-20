@@ -5,6 +5,8 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class Task {
    private int id;
@@ -16,6 +18,7 @@ public class Task {
    private Date deadline;
    private Date createdAt;
    private Date updatedAt;
+   private static final Logger LOG = Logger.getLogger(Task.class.getName());
 
     public Task(int id, int idProject, String name, String notes, String description, boolean isCompleted, Date deadline, Date createdAt, Date updatedAt) {
         this.id = id;
@@ -27,10 +30,13 @@ public class Task {
         this.deadline = deadline;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        
     }
     
     public Task(){
+        this.isCompleted = false;
         this.createdAt = new Date();
+        this.updatedAt = new Date();
         
     }
 
@@ -115,7 +121,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", notes=" + notes + ", description=" + description + ", isCompleted=" + isCompleted + ", deadline=" + deadline + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
+        return this.name;
     }
       
 }
