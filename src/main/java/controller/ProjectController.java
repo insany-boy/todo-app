@@ -66,7 +66,7 @@ public class ProjectController {
           statement.setDate(3, new Date(project.getCreatedAt().getTime()));          
           statement.setDate(4, new Date(project.getUpdateAt().getTime()));
           
-          statement.execute();
+          statement.executeUpdate();
        } catch (SQLException ex) {
            throw new RuntimeException("Erro ao salvar o projeto", ex);
        } finally {
@@ -98,7 +98,7 @@ public class ProjectController {
        statement.setDate(4, new Date(project.getUpdateAt().getTime()));
        statement.setInt(5, project.getId());
        
-       statement.execute();
+       statement.executeUpdate();
        
       } catch (SQLException ex){
           throw new RuntimeException("Erro em atualizar o projeto", ex);
@@ -156,7 +156,7 @@ public class ProjectController {
            connection = ConnectionFactory.getConnection();
            statement = connection.prepareStatement(sql);
            statement.setInt(1, idProject);
-           statement.execute();        
+           statement.executeUpdate();        
         } catch (SQLException ex){
             throw new RuntimeException("Erro ao deletar", ex);
         } finally {

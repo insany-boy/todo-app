@@ -30,7 +30,7 @@ public class TaskController {
                 + "notes, "
                 + "deadline, "
                 + "createdAt, "
-                + "updateAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                + "updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         Connection connection = null;
         PreparedStatement statement = null;
@@ -65,8 +65,8 @@ public class TaskController {
                + "completed = ?, "
                + "deadline = ?, "
                + "createdAt = ?, "
-               + "updateAt = ?, " 
-               + "WHERE id = ?";
+               + "updatedAt = ? WHERE id = ?";
+               //+"WHERE id = ?";
           
          Connection connection = null;
          PreparedStatement statement = null;
