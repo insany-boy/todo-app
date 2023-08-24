@@ -180,7 +180,7 @@ public class TaskDialogScreen extends javax.swing.JDialog {
         
         try {
             
-            Task task = new Task();
+           Task task = new Task();
             
             task.setIdProject(3);
             task.setName(jTextFieldName.getText());
@@ -198,9 +198,13 @@ public class TaskDialogScreen extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Tarefa salva com sucesso");
             } catch (Exception e) {
            JOptionPane.showMessageDialog(rootPane, e.getMessage()); 
+           
+           }
             
+           this.dispose();
+          
       
-         /* Task task = new Task();
+         /*  Task task = new Task();
           
            task.setIdProject(3);
            
@@ -220,9 +224,9 @@ public class TaskDialogScreen extends javax.swing.JDialog {
            
         } catch (Exception e) {
             e.printStackTrace();
-         JOptionPane.showMessageDialog(rootPane, e.getMessage()); */
+         JOptionPane.showMessageDialog(rootPane, e.getMessage()); 
         } 
-        this.dispose(); 
+        this.dispose(); */
     }//GEN-LAST:event_jPanelToolBarSaveMouseClicked
 
     /**
