@@ -5,6 +5,7 @@
 package view;
 
 import controller.TaskController;
+import java.awt.event.WindowAdapter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -180,22 +181,33 @@ public class TaskDialogScreen extends javax.swing.JDialog {
         
         try {
             
-           Task task = new Task();
+           if(jTextFieldName.getText().isEmpty()
+                 && !jFormattedTextFielddeadline.getText().isEmpty()){
+               
+               
+            Task task = new Task();
             
-            task.setIdProject(3);
+            task.setIdProject(project.getId());
             task.setName(jTextFieldName.getText());
             task.setDescription(jTextAreaDescription.getText());
             task.setNotes(jTextAreaNotes.getText());
-            task.setIsCompleted(false);
+            
             
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date deadline = null;
             deadline = dateFormat.parse(jFormattedTextFielddeadline.getText());
             task.setDeadline(deadline);
+            task.setIsCompleted(false);
             
             controller.save(task);
-            ((MainScreen) getParent()).loadTasks(1);
+            ((MainScreen) getParent()).loadTasks(3);
             JOptionPane.showMessageDialog(rootPane, "Tarefa salva com sucesso");
+           
+           } else {
+               JOptionPane.showMessageDialog(rootPane, "A tarefa não foi salva pois existem"
+                       + "campos obrigatorios a serem preenchidos");
+           
+           }
             } catch (Exception e) {
            JOptionPane.showMessageDialog(rootPane, e.getMessage()); 
            
@@ -290,6 +302,10 @@ public class TaskDialogScreen extends javax.swing.JDialog {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    void addWindowListner(WindowAdapter windowAdapter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 

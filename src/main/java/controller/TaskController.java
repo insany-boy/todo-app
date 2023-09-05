@@ -14,6 +14,7 @@ import java.util.List;
 import model.Task;
 import util.ConnectionFactory;
 
+
 /**
  *
  * @author kauan
@@ -43,7 +44,7 @@ public class TaskController {
              statement.setString(3, task.getDescription());
              statement.setBoolean(4, task.isIsCompleted());
              statement.setString(5, task.getNotes());
-             statement.setDate(6, new Date(task.getCreatedAt().getTime()));
+             statement.setDate(6, new Date(task.getDeadline().getTime()));
              statement.setDate(7, new Date(task.getCreatedAt().getTime()));
              statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
 
@@ -65,7 +66,8 @@ public class TaskController {
                + "completed = ?, "
                + "deadline = ?, "
                + "createdAt = ?, "
-               + "updatedAt = ? WHERE id = ?";
+               + "updatedAt = ?"
+               + "WHERE id = ?";
                //+"WHERE id = ?";
           
          Connection connection = null;
@@ -82,22 +84,31 @@ public class TaskController {
             statement.setInt(1, task.getIdProject());
             statement.setString(2, task.getName());
             statement.setString(3, task.getDescription());
-            statement.setBoolean(4, task.isIsCompleted());
-            statement.setString(5, task.getNotes());
-            statement.setDate(6, new Date(task.getCreatedAt().getTime()));
+            statement.setString(4, task.getNotes());
+            statement.setBoolean(5, task.isIsCompleted());
+            statement.setDate(6, new Date (task.getDeadline().getTime()));
             statement.setDate(7, new Date(task.getCreatedAt().getTime()));
             statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
             statement.setInt(9, task.getId());
+            /*statement.setBoolean(4, task.isIsCompleted());
+            statement.setString(5, task.getNotes());
+            statement.setDate(6, new Date(task.getDeadline().getTime()));
+            statement.setDate(7, new Date(task.getCreatedAt().getTime()));
+            statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
+            statement.setInt(9, task.getId());*/
             
             //Executando a query
             statement.execute();
+           
+         
+         
             
          } catch (Exception ex){
              throw new RuntimeException("Erro ao atualizar a tarefa " + ex.getMessage(), ex);
          }
     }
     
-    public void removeById(int taskId) throws SQLException{
+    public void removeById(int taskId) {
         
         String sql = "DELETE FROM tasks WHERE id = ?";
         
@@ -117,7 +128,7 @@ public class TaskController {
             //Executando a query
             statement.execute();                    
         } catch (SQLException e){
-            throw new SQLException("Erro ao deletar a tarefa");
+            throw new RuntimeException("Erro ao deletar a tarefa");
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
         }
