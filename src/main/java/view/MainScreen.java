@@ -138,7 +138,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tick.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(String.valueOf(getClass().getResourceAsStream("tick.png")))); // NOI18N
         jLabel1.setText(" TodoApp");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -169,7 +169,8 @@ public class MainScreen extends javax.swing.JFrame {
         jLabelProjectsTitle.setForeground(new java.awt.Color(0, 153, 102));
         jLabelProjectsTitle.setText("Projetos");
 
-        jLabelProjectsAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        //Testando
+        jLabelProjectsAdd.setIcon(new javax.swing.ImageIcon(String.valueOf(getClass().getResourceAsStream("add.png")))); // NOI18N
         jLabelProjectsAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelProjectsAddMouseClicked(evt);
@@ -204,7 +205,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 153, 102));
         jLabel4.setText("Tarefas");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(String.valueOf(getClass().getResourceAsStream("/add.png")))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -270,7 +271,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanelEmptyList.setBackground(java.awt.Color.white);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lists.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(String.valueOf(getClass().getResourceAsStream("/lists.png")))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 102));

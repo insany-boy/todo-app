@@ -204,7 +204,7 @@ public class TaskDialogScreen extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Tarefa salva com sucesso");
            
            } else {
-               JOptionPane.showMessageDialog(rootPane, "A tarefa não foi salva pois existem"
+               JOptionPane.showMessageDialog(rootPane, "A tarefa não foi salva pois existem "
                        + "campos obrigatorios a serem preenchidos");
            
            }
