@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import model.Project;
 import model.Task;
 import util.buttonColumnCellRederer;
@@ -139,7 +140,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tick.png")));
         jLabel1.setText(" TodoApp");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -170,7 +170,6 @@ public class MainScreen extends javax.swing.JFrame {
         jLabelProjectsTitle.setForeground(new java.awt.Color(0, 153, 102));
         jLabelProjectsTitle.setText("Projetos");
 
-        jLabelProjectsAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png")));
         jLabelProjectsAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelProjectsAddMouseClicked(evt);
@@ -211,12 +210,8 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
-            }
-        });
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
 
         javax.swing.GroupLayout jPanelTasksLayout = new javax.swing.GroupLayout(jPanelTasks);
         jPanelTasks.setLayout(jPanelTasksLayout);
@@ -236,10 +231,13 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTasksLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanelTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTasksLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelTasksLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -281,7 +279,6 @@ public class MainScreen extends javax.swing.JFrame {
         jPanelEmptyList.setBackground(java.awt.Color.white);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lists.png")));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 102));
@@ -396,29 +393,22 @@ public class MainScreen extends javax.swing.JFrame {
        Task task = taskModel.getTasks().get(rowIndex);
         
         switch(columnIndex){
-             case 3:
-                 
+            case 1:
+                break;
+            case 3:     
              taskController.update(task);
-           /*{
-               try {
-                   taskController.save(task);
-               } catch (SQLException ex) {
-                   Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           } */
              break;
-
-             case 4:
-                 
-            break;
-             case 5:
-                taskController.removeById(task.getId());
-                taskModel.getTasks().remove(task);
+            case 4:
+               JOptionPane.showMessageDialog(rootPane, "Editar a tarefa");
+             break;
+            case 5:
+               taskController.removeById(task.getId());
+               taskModel.getTasks().remove(task);
                 
-                int projectIndex = jListProjects.getSelectedIndex();
-                Project project = (Project) projectsModel.get(projectIndex);
-                loadTasks(project.getId());
-            break;
+               int projectIndex = jListProjects.getSelectedIndex();
+               Project project = (Project) projectsModel.get(projectIndex);
+               loadTasks(project.getId());
+              break;
              
         } 
         
