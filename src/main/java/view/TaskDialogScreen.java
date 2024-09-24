@@ -178,8 +178,56 @@ public class TaskDialogScreen extends javax.swing.JDialog {
 
     private void jPanelToolBarSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelToolBarSaveMouseClicked
         // TODO add your handling code here:
-        
         try {
+        // Verificar se o campo "Nome" está vazio
+        if (jTextFieldName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "O campo Nome é obrigatório!");
+            return;
+        }
+        
+        // Verificar se o campo "Data Limite" está vazio
+        if (jFormattedTextFielddeadline.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "O campo Data Limite é obrigatório!");
+            return;
+        }
+        
+        // Criar um objeto Task
+        Task task = new Task();
+        
+        // Preencher os campos da tarefa
+        task.setIdProject(project.getId());
+        task.setName(jTextFieldName.getText());
+        task.setDescription(jTextAreaDescription.getText());
+        task.setNotes(jTextAreaNotes.getText());
+        
+        // Tentar formatar a data limite
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date deadline = dateFormat.parse(jFormattedTextFielddeadline.getText());
+        task.setDeadline(deadline);
+        
+        // Definir o estado da tarefa como não completada
+        task.setIsCompleted(false);
+        
+        // Salvar a tarefa usando o controller
+        controller.save(task);
+        
+        // Recarregar as tarefas no MainScreen (ajuste a lógica se necessário)
+        ((MainScreen) getParent()).loadTasks(project.getId());
+        
+        // Exibir mensagem de sucesso
+        JOptionPane.showMessageDialog(rootPane, "Tarefa salva com sucesso!");
+        
+        // Fechar a janela de diálogo
+        this.dispose();
+        
+        } catch (ParseException e) {
+        // Exibir mensagem de erro caso a data não seja válida
+        JOptionPane.showMessageDialog(rootPane, "Data inválida! Use o formato dd/MM/yyyy.");
+        } catch (Exception e) {
+        // Exibir qualquer outro erro
+        JOptionPane.showMessageDialog(rootPane, "Erro ao salvar a tarefa: " + e.getMessage());
+        }
+        /* try {
             
            if(jTextFieldName.getText().isEmpty()
                  && !jFormattedTextFielddeadline.getText().isEmpty()){
@@ -213,7 +261,7 @@ public class TaskDialogScreen extends javax.swing.JDialog {
            
            }
             
-           this.dispose();
+           this.dispose(); */
           
       
          /*  Task task = new Task();
